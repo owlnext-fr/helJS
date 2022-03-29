@@ -60,7 +60,7 @@ export default class Hel {
         }
 
         const issue: RedmineTS.Issues.CreateParams = {
-            project_id: this._configuration.project_id,
+            project_id: this.configuration.project_id,
             subject: payload.subject,
             description: payload.description,
             tracker_id: RedmineTrackerConstants.ISSUE_TRACKER_ID,

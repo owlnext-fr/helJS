@@ -67,6 +67,33 @@ describe('Hel testing', () => {
         });
     });
 
+    test('Create issue with invalid screenshot upload', async () => {
+        const screenshot_content = fs.readFileSync(__dirname + '/data/test_sample.jpg').toString('base64');
+
+        hel = new Hel({
+            api_key: apiKey,
+            api_url: 'foobarbaz',
+            project_id: 999
+        });
+
+        await hel.createIssue({
+            description: "test w screenshot",
+            reporter_identity: "Obi-Wan Kenobi",
+            subject: "test w screenshot",
+            screenshots: [
+                {
+                    name: 'screenshot_ex.jpg',
+                    content: screenshot_content,
+                    content_type: 'image/jpeg'
+                }
+            ]
+        }).then(issue => {
+            fail(`As it is an error case test, you should not be in the then() function. Result : ${JSON.stringify(issue)}`)
+        }).catch(error => {
+            expect(error).toBeInstanceOf(HelException);
+        });
+    });
+
     test('Create issue with screenshot with data-url', async () => {
         let screenshot_content = fs.readFileSync(__dirname + '/data/test_sample.jpg').toString('base64');
         screenshot_content = `data:image/jpeg;base64,${screenshot_content}`;
