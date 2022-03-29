@@ -8,22 +8,21 @@ npm -i --save @owlnext/hel-js
 
 ## Usage
 
-### Import and initialize
+#### Import and initialize
 ```typescript
 import Hel from '@owlnext/hel-js';
 
 // ...
 
 const hel = new Hel({
-    api_url: 'https://...',
-    api_key: 'qsd5f4tye85rq...',
-    project_id: 1
+    api_url: 'https://...',         // base URL for redmine api
+    api_key: 'qsd5f4tye85rq...',    // api token for redmine api
+    project_id: 1                   // redmine project id for issue reporting
 });
 
 ```
 
-### Create a simple issue
-
+#### Create a simple issue
 ```typescript
 hel.createIssue({
     subject: "Error happens",
@@ -36,8 +35,7 @@ hel.createIssue({
 });
 ```
 
-Create an issue with a screenshot
-
+#### Create an issue with a screenshot
 ```typescript
 const screenshot_content = '/** the image content as base64 string **/'
 
@@ -59,8 +57,7 @@ hel.createIssue({
 });
 ```
 
-Full example
-
+#### Full example
 ```typescript
 const screenshot_content = '/** the image content as base64 string **/'
 
