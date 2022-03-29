@@ -92,7 +92,7 @@ await hel.createIssue({
 
 ## License
 
-This module is under [MIT license](./LICENCE.md).
+This module is under [MIT license](./LICENSE.md).
 
 ## Naming
 
