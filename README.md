@@ -65,7 +65,7 @@ hel.createIssue({
 ```typescript
 const screenshot_content = '/** the image content as base64 string **/'
 
-await hel.createIssue({
+hel.createIssue({
     description: "test w screenshot",
     reporter_identity: "Obi-Wan Kenobi",
     subject: "test w screenshot",

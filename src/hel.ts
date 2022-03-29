@@ -45,17 +45,17 @@ export default class Hel {
             for (const screenshot of payload.screenshots) {
                 const filtered_screenshot_content = DataUrlContentFilter.filter(screenshot.content);
 
-                await this._api.uploadFile(Buffer.from(filtered_screenshot_content, "base64"))
-                    .then((response: any) => {
-                        final_screenshots.push({
-                            content: screenshot.content,
-                            content_type: screenshot.content_type,
-                            name: screenshot.name,
-                            token: response.upload.token
-                        });
-                    }).catch((error: any) => {
-                        throw new HelException(ErrorMessageTransformer.transform(new ErrorPayload(error)))
+                try {
+                    const response = await this._api.uploadFile(Buffer.from(filtered_screenshot_content, "base64"));
+                    final_screenshots.push({
+                        content: screenshot.content,
+                        content_type: screenshot.content_type,
+                        name: screenshot.name,
+                        token: response.upload.token
                     });
+                } catch (error) {
+                    throw new HelException(ErrorMessageTransformer.transform(new ErrorPayload(<Error> error)))
+                }
             }
         }
 
@@ -81,12 +81,15 @@ export default class Hel {
             issue.uploads = uploads;
         }
 
-        return await this._api.createIssue(issue)
-            .then((issue: any) => {
-                return Promise.resolve(<Issue>issue.issue);
-            }).catch((error: any) => {
-                throw new HelException(ErrorMessageTransformer.transform(new ErrorPayload(error)))
-            });
+        let issue_response;
+
+        try {
+            issue_response = await this._api.createIssue(issue);
+        } catch (error) {
+            throw new HelException(ErrorMessageTransformer.transform(new ErrorPayload(<Error> error)))
+        }
+
+       return <Issue> issue_response.issue;
     }
 
     /**

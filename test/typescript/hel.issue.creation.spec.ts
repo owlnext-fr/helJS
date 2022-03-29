@@ -17,16 +17,17 @@ describe('Hel issue creation testing', () => {
     });
 
     test('Create simple issue', async () => {
-        await hel.createIssue({
-            description: "test desc",
-            reporter_identity: "User testing",
-            subject: "test"
-        }).then(issue => {
+        try {
+            const issue = await hel.createIssue({
+                description: "test desc",
+                reporter_identity: "User testing",
+                subject: "test"
+            });
             expect(issue).toHaveProperty('id');
-        }).catch(error => {
+        } catch (error) {
             fail(`Oops, seems the test failed : ${error}`)
-        });
-    })
+        }
+    });
 
     test('Create incorrect issue', async () => {
         hel = new Hel({
@@ -35,36 +36,38 @@ describe('Hel issue creation testing', () => {
             project_id: 999
         });
 
-        await hel.createIssue({
-            description: "test desc",
-            reporter_identity: "User testing",
-            subject: "test"
-        }).then(issue => {
+        try {
+            const issue = await hel.createIssue({
+                description: "test desc",
+                reporter_identity: "User testing",
+                subject: "test"
+            });
             fail(`As it is an error case test, you should not be in the then() function. Result : ${JSON.stringify(issue)}`)
-        }).catch(error => {
+        } catch(error) {
             expect(error).toBeInstanceOf(HelException);
-        });
+        }
     })
 
     test('Create issue with screenshot', async () => {
         const screenshot_content = fs.readFileSync(__dirname + '/data/test_sample.jpg').toString('base64');
 
-        await hel.createIssue({
-            description: "test w screenshot",
-            reporter_identity: "Obi-Wan Kenobi",
-            subject: "test w screenshot",
-            screenshots: [
-                {
-                    name: 'screenshot_ex.jpg',
-                    content: screenshot_content,
-                    content_type: 'image/jpeg'
-                }
-            ]
-        }).then(issue => {
+        try {
+            const issue = await hel.createIssue({
+                description: "test w screenshot",
+                reporter_identity: "Obi-Wan Kenobi",
+                subject: "test w screenshot",
+                screenshots: [
+                    {
+                        name: 'screenshot_ex.jpg',
+                        content: screenshot_content,
+                        content_type: 'image/jpeg'
+                    }
+                ]
+            });
             expect(issue).toHaveProperty('id');
-        }).catch(error => {
-            fail(`Oops, seems the test failed : ${error}`)
-        });
+        } catch(error) {
+            fail(`Oops, seems the test failed : ${error}`);
+        }
     });
 
     test('Create issue with invalid screenshot upload', async () => {
@@ -76,72 +79,75 @@ describe('Hel issue creation testing', () => {
             project_id: 999
         });
 
-        await hel.createIssue({
-            description: "test w screenshot",
-            reporter_identity: "Obi-Wan Kenobi",
-            subject: "test w screenshot",
-            screenshots: [
-                {
-                    name: 'screenshot_ex.jpg',
-                    content: screenshot_content,
-                    content_type: 'image/jpeg'
-                }
-            ]
-        }).then(issue => {
+        try {
+            const issue = await hel.createIssue({
+                description: "test w screenshot",
+                reporter_identity: "Obi-Wan Kenobi",
+                subject: "test w screenshot",
+                screenshots: [
+                    {
+                        name: 'screenshot_ex.jpg',
+                        content: screenshot_content,
+                        content_type: 'image/jpeg'
+                    }
+                ]
+            });
             fail(`As it is an error case test, you should not be in the then() function. Result : ${JSON.stringify(issue)}`)
-        }).catch(error => {
+        } catch(error) {
             expect(error).toBeInstanceOf(HelException);
-        });
+        }
     });
 
     test('Create issue with screenshot with data-url', async () => {
         let screenshot_content = fs.readFileSync(__dirname + '/data/test_sample.jpg').toString('base64');
         screenshot_content = `data:image/jpeg;base64,${screenshot_content}`;
 
-        await hel.createIssue({
-            description: "test w screenshot",
-            reporter_identity: "Obi-Wan Kenobi",
-            subject: "test w screenshot",
-            screenshots: [
-                {
-                    name: 'screenshot_ex.jpg',
-                    content: screenshot_content,
-                    content_type: 'image/jpeg'
-                }
-            ]
-        }).then(issue => {
+        try {
+            const issue = await hel.createIssue({
+                description: "test w screenshot",
+                reporter_identity: "Obi-Wan Kenobi",
+                subject: "test w screenshot",
+                screenshots: [
+                    {
+                        name: 'screenshot_ex.jpg',
+                        content: screenshot_content,
+                        content_type: 'image/jpeg'
+                    }
+                ]
+            });
             expect(issue).toHaveProperty('id');
-        }).catch(error => {
-            fail(`Oops, seems the test failed : ${error}`)
-        });
+        } catch(error) {
+            fail(`Oops, seems the test failed : ${error}`);
+        }
     });
 
     test('Create full issue', async () => {
         const screenshot_content = fs.readFileSync(__dirname + '/data/test_sample.jpg').toString('base64');
 
-        await hel.createIssue({
-            description: "test w screenshot",
-            reporter_identity: "Obi-Wan Kenobi",
-            subject: "test w screenshot",
-            url: "http://localhost:8822",
-            session_data: "{'session_id': 43531551}",
-            stack_trace: "        at /var/www/src/hel.ts:69:23\n" +
-                         "        at processTicksAndRejections (internal/process/task_queues.js:95:5)\n",
-            additional_data: {
-                "foo": "bar"
-            },
-            screenshots: [
-                {
-                    name: 'screenshot_ex.jpg',
-                    content: screenshot_content,
-                    content_type: 'image/jpeg'
-                }
-            ]
-        }).then(issue => {
+        try {
+            const issue = await hel.createIssue({
+                description: "test w screenshot",
+                reporter_identity: "Obi-Wan Kenobi",
+                subject: "test w screenshot",
+                url: "http://localhost:8822",
+                session_data: "{'session_id': 43531551}",
+                stack_trace: "        at /var/www/src/hel.ts:69:23\n" +
+                    "        at processTicksAndRejections (internal/process/task_queues.js:95:5)\n",
+                additional_data: {
+                    "foo": "bar"
+                },
+                screenshots: [
+                    {
+                        name: 'screenshot_ex.jpg',
+                        content: screenshot_content,
+                        content_type: 'image/jpeg'
+                    }
+                ]
+            });
             expect(issue).toHaveProperty('id');
-        }).catch(error => {
-            fail(`Oops, seems the test failed : ${error}`)
-        });
+        } catch (error) {
+            fail(`Oops, seems the test failed : ${error}`);
+        }
     });
 
 });
