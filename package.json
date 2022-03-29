@@ -8,9 +8,12 @@
     "dist"
   ],
   "scripts": {
+    "prebuild": "echo nok > .buildstatus",
+    "postbuild": "echo ok > .buildstatus",
     "build": "tsc",
-    "prepare": "rm -rf ./dist && npm run build",
-    "test": "jest"
+    "prepare": "rm -rf ./dist && npm run build && npm run make-badges",
+    "test": "jest",
+    "make-badges": "node_modules/.bin/jest-badges-readme"
   },
   "repository": {
     "type": "git",
@@ -29,10 +32,11 @@
   },
   "homepage": "https://github.com/owlnext-fr/helJS#readme",
   "devDependencies": {
+    "@olavoparno/jest-badges-readme": "^1.5.1",
     "@types/jest": "^27.4.0",
+    "dotenv": "^10.0.0",
     "jest": "^27.4.5",
-    "ts-jest": "^27.1.2",
-    "dotenv": "^10.0.0"
+    "ts-jest": "^27.1.2"
   },
   "dependencies": {
     "axios": "^0.24.0",
