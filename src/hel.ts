@@ -70,13 +70,13 @@ export default class Hel {
         if (final_screenshots.length > 0) {
             const uploads: RedmineTS.Common.Upload[] = [];
 
-            final_screenshots.forEach((screenshot: Screenshot) => {
+            for(const screenshot of final_screenshots) {
                 uploads.push(<RedmineTS.Common.Upload>{
                     content_type: screenshot.content_type,
                     filename: screenshot.name,
                     token: screenshot.token
                 });
-            });
+            }
 
             issue.uploads = uploads;
         }

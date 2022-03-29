@@ -2,7 +2,7 @@ import Hel from "../../src";
 import * as fs from "fs";
 import HelException from "../../src/exception/hel-exception";
 
-describe('Hel testing', () => {
+describe('Hel issue creation testing', () => {
     let hel: Hel;
     let apiKey = '04dab6140d0c772548f646369995421bd6153193';
     let apiUrl = 'http://172.122.0.1:8822';

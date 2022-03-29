@@ -1,5 +1,5 @@
 # helJS
-A Javascript/Node/React API interface to Redmine bugtracker.
+A Javascript/Node/React API interface to Redmine bugtracker and easily add issues.
 
 | Statements                                    | Branches                                  | Functions                                   | Lines                               | Build Status                                    |
 |-----------------------------------------------|-------------------------------------------|---------------------------------------------|-------------------------------------|-------------------------------------------------|
@@ -89,3 +89,13 @@ await hel.createIssue({
     // treat error
 });
 ```
+
+## License
+
+This module is under [MIT license](./LICENCE.md).
+
+## Naming
+
+> Hel (Old Norse: [ˈhel]) is a female being in Norse mythology who is said to preside over an underworld realm of the same name, where she receives a portion of the dead. 
+> 
+> Wikipedia
