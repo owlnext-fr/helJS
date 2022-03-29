@@ -1,0 +1,46 @@
+{
+  "name": "@owlnext/hel-js",
+  "version": "1.0.0",
+  "description": "Redmine bugtracker API interfaces &amp; utils for javascript technologies",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "echo nok > .buildstatus",
+    "postbuild": "echo ok > .buildstatus",
+    "build": "tsc",
+    "prepare": "rm -rf ./dist && npm run test && npm run build && npm run make-badges",
+    "test": "jest",
+    "make-badges": "node_modules/.bin/jest-badges-readme"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/owlnext-fr/helJS.git"
+  },
+  "keywords": [
+    "hel",
+    "api",
+    "redmine",
+    "bugtracker"
+  ],
+  "author": "Owlnext",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/owlnext-fr/helJS/issues"
+  },
+  "homepage": "https://github.com/owlnext-fr/helJS#readme",
+  "devDependencies": {
+    "@olavoparno/jest-badges-readme": "^1.5.1",
+    "@types/jest": "^27.4.0",
+    "dotenv": "^10.0.0",
+    "jest": "^27.4.5",
+    "ts-jest": "^27.1.2"
+  },
+  "dependencies": {
+    "redmine-ts": "^0.3.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  }
+}
